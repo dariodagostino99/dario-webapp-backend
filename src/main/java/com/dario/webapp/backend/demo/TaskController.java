@@ -1,9 +1,7 @@
 package com.dario.webapp.backend.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,7 +13,24 @@ public class TaskController {
     private TaskService taskService;
 
     @GetMapping("")
+    @CrossOrigin(origins = "http://localhost:3000")
     public List<Task> getAllTasks(){
         return taskService.getAllTasks();
     }
+
+    @PostMapping("")
+    public Task createTask(@RequestBody TaskDTO taskDTO){
+        return taskService.createTask(taskDTO);
+    }
+
+    @PutMapping("/{id}")
+    public Task updateTask(@PathVariable("id") Long taskId, @RequestBody TaskDTO taskDTO) {
+        return taskService.updateTask(taskId, taskDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    public Task updateTask(@PathVariable("id") Long taskId) {
+        return taskService.deleteTask(taskId);
+    }
+
 }

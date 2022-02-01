@@ -10,4 +10,8 @@ public class TaskDTO {
     private Long id;
 
     private String text;
+
+    public Task toTask() {
+        return Task.builder().text(getText()).build();
+    }
 }
