@@ -1,5 +1,8 @@
-package com.dario.webapp.backend.demo;
+package com.dario.webapp.backend.demo.todo.rest;
 
+import com.dario.webapp.backend.demo.todo.model.TaskDTO;
+import com.dario.webapp.backend.demo.todo.services.TaskService;
+import com.dario.webapp.backend.demo.todo.model.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

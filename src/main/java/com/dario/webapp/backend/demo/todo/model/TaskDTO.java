@@ -1,4 +1,4 @@
-package com.dario.webapp.backend.demo;
+package com.dario.webapp.backend.demo.todo.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,8 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TaskDTO {
-
-    private Long id;
 
     private String text;
 

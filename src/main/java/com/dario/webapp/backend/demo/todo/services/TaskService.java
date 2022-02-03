@@ -1,5 +1,8 @@
-package com.dario.webapp.backend.demo;
+package com.dario.webapp.backend.demo.todo.services;
 
+import com.dario.webapp.backend.demo.todo.model.Task;
+import com.dario.webapp.backend.demo.todo.model.TaskDTO;
+import com.dario.webapp.backend.demo.todo.repositories.TaskRepository;
 import liquibase.repackaged.org.apache.commons.lang3.Validate;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.dario.webapp.backend.demo;
+package com.dario.webapp.backend.demo.todo.model;
 
 import lombok.*;
 
