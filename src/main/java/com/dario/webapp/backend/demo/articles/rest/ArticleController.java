@@ -1,6 +1,9 @@
-package com.dario.webapp.backend.demo.articles;
+package com.dario.webapp.backend.demo.articles.rest;
 
 
+import com.dario.webapp.backend.demo.articles.service.ArticleService;
+import com.dario.webapp.backend.demo.articles.model.Article;
+import com.dario.webapp.backend.demo.articles.model.ArticleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

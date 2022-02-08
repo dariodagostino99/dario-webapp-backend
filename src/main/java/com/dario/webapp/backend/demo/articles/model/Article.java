@@ -1,8 +1,9 @@
-package com.dario.webapp.backend.demo.articles;
+package com.dario.webapp.backend.demo.articles.model;
 
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 @AllArgsConstructor
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @Table(name = "articles")
 @Entity
 @Builder
-public class Article {
+public class Article implements Serializable {
 
     @Id()
     @GeneratedValue(strategy = GenerationType.AUTO)

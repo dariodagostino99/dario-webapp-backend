@@ -1,6 +1,9 @@
-package com.dario.webapp.backend.demo.articles;
+package com.dario.webapp.backend.demo.articles.service;
 
 
+import com.dario.webapp.backend.demo.articles.model.Article;
+import com.dario.webapp.backend.demo.articles.model.ArticleDTO;
+import com.dario.webapp.backend.demo.articles.repository.ArticleRepository;
 import liquibase.repackaged.org.apache.commons.lang3.Validate;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
