@@ -1,5 +1,7 @@
 package com.dario.webapp.backend.demo.user.model;
 
+import com.dario.webapp.backend.demo.authorization.Authorization;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,5 +30,12 @@ public class User {
 
     @Column(name = "profile_image")
     private String profileImage;
+
+    @Column
+    private String description;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
+    private Authorization authorization;
 
 }

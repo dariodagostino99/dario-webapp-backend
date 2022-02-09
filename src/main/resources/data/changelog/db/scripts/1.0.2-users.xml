@@ -23,4 +23,11 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="20220209-dario" author="dario">
+        <addColumn tableName="users">
+            <column name="description" type="varchar(225)">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

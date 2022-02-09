@@ -1,5 +1,6 @@
 package com.dario.webapp.backend.demo.user.service;
 
+import com.dario.webapp.backend.demo.authorization.Authorization;
 import com.dario.webapp.backend.demo.user.model.User;
 import com.dario.webapp.backend.demo.user.model.UserDTO;
 import com.dario.webapp.backend.demo.user.model.UserResponseDTO;
@@ -51,6 +52,8 @@ public class UserService {
         User user = userDTO.toUser();
         user.setPassword(encryptedPassword);
         user.setProfileImage("https://happytravel.viajes/wp-content/uploads/2020/04/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png");
+        user.setAuthorization(Authorization.builder().user(user).authToken(encryptedPassword).build());
+        user.setDescription(String.format("Hi I am %s and I am using Dario web app!", user.getUsername()));
         return userRepository.save(user);
     }
 
