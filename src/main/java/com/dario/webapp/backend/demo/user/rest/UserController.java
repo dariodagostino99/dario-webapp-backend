@@ -2,7 +2,6 @@ package com.dario.webapp.backend.demo.user.rest;
 
 import com.dario.webapp.backend.demo.user.model.User;
 import com.dario.webapp.backend.demo.user.model.UserDTO;
-import com.dario.webapp.backend.demo.user.model.UserResponseDTO;
 import com.dario.webapp.backend.demo.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +18,8 @@ public class UserController {
         return userService.createUser(userDTO);
     }
 
-    @GetMapping()
-    public UserResponseDTO logIn (@RequestBody UserDTO userDTO){
-        return userService.getUser(userDTO);
+    @GetMapping("/{email}/{password}")
+    public User logIn(@PathVariable("email")String email, @PathVariable("password")String password) {
+        return userService.getUser(email, password);
     }
 }

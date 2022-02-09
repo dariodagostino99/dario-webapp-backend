@@ -36,7 +36,11 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public User findUserByEmailAndPassword(String email, String password) {
-        return userRepository.findByEmailAndPassword(email, password).orElse(null);
+        User user = userRepository.findByEmailAndPassword(email, password).orElse(null);
+        if (user == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The user does not exists");
+        }
+        return user;
     }
 
     @SneakyThrows
@@ -52,10 +56,9 @@ public class UserService {
 
     @SneakyThrows
     @Transactional(readOnly = true)
-    public UserResponseDTO getUser(UserDTO userDTO) {
+    public User getUser(String email, String password) {
         MessageDigest digest = secureHashAlgorithmService.getSHA256Instance("SHA-256");
-        String encryptedPassword = secureHashAlgorithmService.encryptPassword(digest, userDTO.getPassword());
-        User user = findUserByEmailAndPassword(userDTO.getEmail(), encryptedPassword);
-        return userResponseStrategy.generateResponse(user);
+        String encryptedPassword = secureHashAlgorithmService.encryptPassword(digest, password);
+        return findUserByEmailAndPassword(email, encryptedPassword);
     }
 }
