@@ -1,9 +1,9 @@
 package com.dario.webapp.backend.demo.user.service;
 
-import com.dario.webapp.backend.demo.authorization.Authorization;
+import com.dario.webapp.backend.demo.authorization.model.Authorization;
+import com.dario.webapp.backend.demo.user.decorator.AuthTokenDecorator;
 import com.dario.webapp.backend.demo.user.model.User;
 import com.dario.webapp.backend.demo.user.model.UserDTO;
-import com.dario.webapp.backend.demo.user.model.UserResponseDTO;
 import com.dario.webapp.backend.demo.user.repository.UserRepository;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +24,7 @@ public class UserService {
     @Autowired
     private SecureHashAlgorithmService secureHashAlgorithmService;
     @Autowired
-    private UserResponseStrategy userResponseStrategy;
+    private AuthTokenDecorator authTokenDecorator;
 
     @Transactional(readOnly = true)
     public User findById(Long id) {
@@ -51,9 +51,9 @@ public class UserService {
         String encryptedPassword = secureHashAlgorithmService.encryptPassword(digest, userDTO.getPassword());
         User user = userDTO.toUser();
         user.setPassword(encryptedPassword);
-        user.setProfileImage("https://happytravel.viajes/wp-content/uploads/2020/04/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png");
-        user.setAuthorization(Authorization.builder().user(user).authToken(encryptedPassword).build());
-        user.setDescription(String.format("Hi I am %s and I am using Dario web app!", user.getUsername()));
+        user.getUserProfile().setUser(user);
+        user.getAuthorization().setAuthToken(encryptedPassword);
+        user.getAuthorization().setUser(user);
         return userRepository.save(user);
     }
 
@@ -62,6 +62,8 @@ public class UserService {
     public User getUser(String email, String password) {
         MessageDigest digest = secureHashAlgorithmService.getSHA256Instance("SHA-256");
         String encryptedPassword = secureHashAlgorithmService.encryptPassword(digest, password);
-        return findUserByEmailAndPassword(email, encryptedPassword);
+        User user = findUserByEmailAndPassword(email, encryptedPassword);
+        authTokenDecorator.decorateUserWithAuthToken(user);
+        return user;
     }
 }

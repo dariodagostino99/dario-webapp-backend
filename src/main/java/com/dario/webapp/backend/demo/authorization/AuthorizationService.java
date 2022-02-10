@@ -1,5 +1,7 @@
 package com.dario.webapp.backend.demo.authorization;
 
+import com.dario.webapp.backend.demo.authorization.model.Authorization;
+import com.dario.webapp.backend.demo.authorization.repository.AuthorizationRepository;
 import com.dario.webapp.backend.demo.user.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +18,9 @@ public class AuthorizationService {
     private AuthorizationRepository authorizationRepository;
 
     @Transactional(readOnly = true)
-    public User validateToken(String authToken){
+    public User validateToken(String authToken) {
         Authorization authorization = authorizationRepository.findByAuthToken(authToken).orElse(null);
-        if (authorization == null){
+        if (authorization == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
         return authorization.getUser();

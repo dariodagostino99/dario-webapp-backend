@@ -1,6 +1,8 @@
-package com.dario.webapp.backend.demo.authorization;
+package com.dario.webapp.backend.demo.authorization.rest;
 
 
+import com.dario.webapp.backend.demo.authorization.model.Authorization;
+import com.dario.webapp.backend.demo.authorization.AuthorizationService;
 import com.dario.webapp.backend.demo.user.model.User;
 import com.dario.webapp.backend.demo.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

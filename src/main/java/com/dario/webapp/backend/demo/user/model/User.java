@@ -1,10 +1,11 @@
 package com.dario.webapp.backend.demo.user.model;
 
-import com.dario.webapp.backend.demo.authorization.Authorization;
+import com.dario.webapp.backend.demo.authorization.model.Authorization;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @Table(name = "users")
 @Entity
 @Builder
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,14 +29,18 @@ public class User {
     @Column
     private String email;
 
-    @Column(name = "profile_image")
-    private String profileImage;
-
-    @Column
-    private String description;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private UserProfile userProfile;
 
     @JsonIgnore
     @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
     private Authorization authorization;
+
+    @Transient
+    private String authToken;
+
+    public String getAuthToken() {
+        return getAuthorization() != null ? getAuthorization().getAuthToken() : null;
+    }
 
 }
