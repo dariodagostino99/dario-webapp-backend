@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet id="20220315-dario" author="dario">
+        <createTable tableName="currencies">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="currency_name" type="varchar(225)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time_stamp" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="20220316-dario" author="dario">
+        <dropColumn tableName="currencies" columnName="value">
+        </dropColumn>
+        <addColumn tableName="currencies">
+            <column name="value" type="double">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

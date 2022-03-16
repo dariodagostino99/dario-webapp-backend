@@ -1,6 +1,5 @@
 package com.dario.webapp.backend.demo.user.service;
 
-import com.dario.webapp.backend.demo.authorization.model.Authorization;
 import com.dario.webapp.backend.demo.user.decorator.AuthTokenDecorator;
 import com.dario.webapp.backend.demo.user.model.User;
 import com.dario.webapp.backend.demo.user.model.UserDTO;
@@ -38,7 +37,7 @@ public class UserService {
     @Transactional(readOnly = true)
     public User findUserByEmailAndPassword(String email, String password) {
         User user = userRepository.findByEmailAndPassword(email, password).orElse(null);
-        if (user == null){
+        if (user == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The user does not exists");
         }
         return user;
