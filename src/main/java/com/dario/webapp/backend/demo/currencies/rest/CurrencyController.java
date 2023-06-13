@@ -16,7 +16,7 @@ public class CurrencyController {
     private CurrencyService currencyService;
 
     @GetMapping("/{currency}")
-    public HistoricCurrencyDTO getCurrencyHistoricValues(@PathVariable("currency") String currencyName){
+    public HistoricCurrencyDTO getCurrencyHistoricValues(@PathVariable("currency") String currencyName) {
         return currencyService.getCurrencyHistoricValues(currencyName);
     }
 }

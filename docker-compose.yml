@@ -1,0 +1,15 @@
+
+version: '3.3'
+services:
+  web:
+    build: .
+    ports: 
+      - "8080:80"
+  db:
+    image: postgres:alpine3.15
+    ports: 
+      - "127.0.0.1:5438:5433"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD= 
+      - POSRGRES_DB=dariowebapp

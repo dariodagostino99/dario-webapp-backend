@@ -19,7 +19,7 @@ public class NomicCurrencyFetcherJob {
     @Autowired
     private CurrencyService currencyService;
 
-    @Scheduled(fixedRate = 30000)
+    @Scheduled(fixedRate = 50000)
     public void reportCurrentTime(){
         log.info("[CURRENCY-JOB] - Task started at: {}", LocalDateTime.now());
         //
